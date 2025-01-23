@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fashion Recommendation System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .upload-section {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+        }
+        #preview-image {
+            max-width: 300px;
+            max-height: 300px;
+            margin: 10px 0;
+            display: none;
+        }
+        .input-field {
+            margin: 15px 0;
+        }
+        .input-field input[type="text"] {
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+        #input-product, #results {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .product-card {
+            text-align: center;
+            width: 250px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .product-card img {
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: contain;
+        }
+        .product-details {
+            margin-top: 10px;
+        }
+        #loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fashion Recommendation System</h1>
+    
+    <div class="upload-section">
+        <h2>Upload Your Image</h2>
+        <input type="file" id="imageInput" accept="image/*">
+        <div class="input-field">
+            <input type="text" id="productType" placeholder="Enter Product Type (e.g., Dresses, Shoes)">
+        </div>
+        <img id="preview-image" alt="Preview">
+        <button id="submitBtn" disabled>Get Recommendations</button>
+    </div>
+
+    <div id="loading">Processing your image...</div>
+    <div id="input-product"></div>
+    <h2>Recommended Compatible Products</h2>
+    <div id="results"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const imageInput = document.getElementById('imageInput');
+            const productType = document.getElementById('productType');
+            const previewImage = document.getElementById('preview-image');
+            const submitBtn = document.getElementById('submitBtn');
+            const loadingDiv = document.getElementById('loading');
+
+            function checkSubmitEnabled() {
+                const hasImage = imageInput.files.length > 0;
+                const hasType = productType.value.trim() !== '';
+                submitBtn.disabled = !(hasImage && hasType);
+            }
+
+            imageInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        previewImage.src = e.target.result;
+                        previewImage.style.display = 'block';
+                        checkSubmitEnabled();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            productType.addEventListener('input', checkSubmitEnabled);
+
+            submitBtn.addEventListener('click', async () => {
+                const file = imageInput.files[0];
+                const type = productType.value.trim();
+                
+                if (!file || !type) {
+                    alert('Please select an image and enter a product type');
+                    return;
+                }
+
+                loadingDiv.style.display = 'block';
+                submitBtn.disabled = true;
+
+                const formData = new FormData();
+                formData.append('image', file);
+                formData.append('product_type', type);
+
+                try {
+                    const response = await fetch('http://localhost:5000/recommend', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const data = await response.json();
+                    
+                    // Display input image
+                    const inputProductDiv = document.getElementById('input-product');
+                    inputProductDiv.innerHTML = '';
+                    
+                    const inputProductCard = document.createElement('div');
+                    inputProductCard.classList.add('product-card');
+
+                    const inputImg = document.createElement('img');
+                    inputImg.src = previewImage.src;
+                    inputImg.alt = 'Input Image';
+
+                    const inputProductDetails = document.createElement('div');
+                    inputProductDetails.classList.add('product-details');
+                    inputProductDetails.innerHTML = `
+                        <p><strong>Your Input Image</strong></p>
+                        <p>Type: ${type}</p>
+                    `;
+
+                    inputProductCard.appendChild(inputImg);
+                    inputProductCard.appendChild(inputProductDetails);
+                    inputProductDiv.appendChild(inputProductCard);
+
+                    // Display recommended products
+                    const resultsDiv = document.getElementById('results');
+                    resultsDiv.innerHTML = '';
+
+                    data.recommendations.forEach(product => {
+                        const productCard = document.createElement('div');
+                        productCard.classList.add('product-card');
+
+                        const img = document.createElement('img');
+                        img.src = product.image_path.replace('./', '/');
+                        img.alt = product.product_type;
+
+                        const productDetails = document.createElement('div');
+                        productDetails.classList.add('product-details');
+                        productDetails.innerHTML = `
+                            <p><strong>${product.product_type}</strong></p>
+                            <p>Similarity Score: ${(product.similarity_score * 100).toFixed(2)}</p>
+
+
+                        `;
+
+                        productCard.appendChild(img);
+                        productCard.appendChild(productDetails);
+                        resultsDiv.appendChild(productCard);
+                    });
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Failed to get recommendations');
+                } finally {
+                    loadingDiv.style.display = 'none';
+                    submitBtn.disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
