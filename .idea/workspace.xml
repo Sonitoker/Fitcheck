@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0bffaebf-2091-4289-a73f-158dd73c2e7b" name="Changes" comment="" />
+    <list default="true" id="0bffaebf-2091-4289-a73f-158dd73c2e7b" name="Changes" comment="end of Fitcheck">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/flask_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/flask_server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/server.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/websites/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/websites/index2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/app/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/app/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/recommend.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/recommend1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/recommender.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/recommender2.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -101,7 +112,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="recommend" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="recommend1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FitCheck" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -114,7 +125,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/recommend.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\soni\AI project\FitCheck\src\recommend1.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -132,8 +143,9 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11 (Fitcheck)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/backend" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/backend/server.py" />
@@ -274,7 +286,7 @@
         <item itemvalue="Python.flask_server" />
         <item itemvalue="Python.server (1)" />
         <item itemvalue="Python.training" />
-        <item itemvalue="Python.recommend" />
+        <item itemvalue="Python.recommend1.0" />
       </list>
     </recent_temporary>
   </component>
@@ -294,6 +306,19 @@
       <option name="presentableId" value="Default" />
       <updated>1733842950145</updated>
     </task>
+    <task id="LOCAL-00001" summary="end of Fitcheck">
+      <option name="closed" value="true" />
+      <created>1737592903939</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1737592903939</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="end of Fitcheck" />
+    <option name="LAST_COMMIT_MESSAGE" value="end of Fitcheck" />
   </component>
 </project>

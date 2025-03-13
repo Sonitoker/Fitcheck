@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 import logging
 
 # Import the custom image recommender
-from src.recommender import CustomImageRecommender
+from src.recommender2 import CustomImageRecommender
 
 app = Flask(__name__)
 CORS(app)

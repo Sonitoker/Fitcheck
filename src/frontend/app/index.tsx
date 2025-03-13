@@ -78,7 +78,7 @@ export default function Index() {
     formData.append("product_type", itemType);
 
     try {
-      const response = await fetch("http://192.168.68.103:5000/recommend", {
+      const response = await fetch("http://192.168.68.117:5000/recommend", {
         method: "POST",
         body: formData,
       });
@@ -156,7 +156,7 @@ export default function Index() {
                   source={{
                     uri: product.image_path.startsWith("http")
                       ? product.image_path
-                      : `http://192.168.68.103:5000/${product.image_path.replace("./", "")}`,
+                      : `http://192.168.68.117:5000/${product.image_path.replace("./", "")}`,
                   }}
                   style={styles.productImage}
 
